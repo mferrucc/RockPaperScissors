@@ -36,17 +36,37 @@
             }
         }
 
+        function determineWinner(results){
+            const playerWins = results.filter(result => result.includes("Player wins")).length;
+            const computerWins = results.filter(result => result.includes("Player loses")).length;
+
+            if(playerWins > computerWins){
+                return `Overall Winner: Player! ${playerWins} wins to ${computerWins} losses.`;
+            } else if(computerWins > playerWins){
+                return `Overall Winner: Computer! ${computerWins} wins to ${playerWins} losses.`;
+            } else {
+                return `Overall Result: It's a tie! ${playerWins} wins each.`;
+            }
+        }
+
         function playGame(){
             
-            const humanSelection = getHumanSelection();
-            const computerSelection2 = getComputerSelection();
+            const results = [];
+
+            for (let i = 0; i < 5; i++) {
+                const humanSelection = getHumanSelection();
+                const computerSelection = getComputerSelection();
+                const result = playRound(humanSelection, computerSelection);
+                results.push(result);
+                console.log(`Round ${i + 1}: ${result}`);
+            }           
             
-            const result = playRound(humanSelection, computerSelection2);
-            console.log(result);
+            console.log(determineWinner(results));
+
         }
 
         playGame();
-        
+
     </script>
 </head>
 <body>
