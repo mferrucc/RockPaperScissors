@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors game!</title>
+    <script>
+        console.log("This is the Rock Paper Scissors game!");
 
+        function getHumanSelection(){
+            const selection = prompt("Enter your choice (rock, paper, or scissors):").toLowerCase();
+            if(["rock", "paper", "scissors"].includes(selection)){
+                return selection;
+            } else {
+                alert("Invalid choice! Please choose rock, paper, or scissors.");
+                return getHumanSelection();
+            }
+        }
+
+        function getComputerSelection(){
+            const choices = ["rock", "paper", "scissors"];
+            return choices[Math.floor(Math.random() * choices.length)];
+        }
+
+        function playRound(playerSelection, computerSelection){
+            if(playerSelection === computerSelection){
+                return "It's a tie!";
+            } else if(
+                (playerSelection === "rock" && computerSelection === "scissors") ||
+                (playerSelection === "paper" && computerSelection === "rock") ||
+                (playerSelection === "scissors" && computerSelection === "paper")
+            ){
+                return `Player wins! ${playerSelection} beats ${computerSelection}`;
+            } else {
+                return `Player loses! ${computerSelection} beats ${playerSelection}`;
+            }
+        }
+
+        function playGame(){
+            
+            const humanSelection = getHumanSelection();
+            const computerSelection2 = getComputerSelection();
+            
+            const result = playRound(humanSelection, computerSelection2);
+            console.log(result);
+        }
+
+        playGame();
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
