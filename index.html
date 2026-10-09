@@ -4,72 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors game!</title>
-    <script>
-        console.log("This is the Rock Paper Scissors game!");
-
-        function getHumanSelection(){
-            const selection = prompt("Enter your choice (rock, paper, or scissors):").toLowerCase();
-            if(["rock", "paper", "scissors"].includes(selection)){
-                return selection;
-            } else {
-                alert("Invalid choice! Please choose rock, paper, or scissors.");
-                return getHumanSelection();
-            }
-        }
-
-        function getComputerSelection(){
-            const choices = ["rock", "paper", "scissors"];
-            return choices[Math.floor(Math.random() * choices.length)];
-        }
-
-        function playRound(playerSelection, computerSelection){
-            if(playerSelection === computerSelection){
-                return "It's a tie!";
-            } else if(
-                (playerSelection === "rock" && computerSelection === "scissors") ||
-                (playerSelection === "paper" && computerSelection === "rock") ||
-                (playerSelection === "scissors" && computerSelection === "paper")
-            ){
-                return `Player wins! ${playerSelection} beats ${computerSelection}`;
-            } else {
-                return `Player loses! ${computerSelection} beats ${playerSelection}`;
-            }
-        }
-
-        function determineWinner(results){
-            const playerWins = results.filter(result => result.includes("Player wins")).length;
-            const computerWins = results.filter(result => result.includes("Player loses")).length;
-
-            if(playerWins > computerWins){
-                return `Overall Winner: Player! ${playerWins} wins to ${computerWins} losses.`;
-            } else if(computerWins > playerWins){
-                return `Overall Winner: Computer! ${computerWins} wins to ${playerWins} losses.`;
-            } else {
-                return `Overall Result: It's a tie! ${playerWins} wins each.`;
-            }
-        }
-
-        function playGame(){
-            
-            const results = [];
-
-            for (let i = 0; i < 5; i++) {
-                const humanSelection = getHumanSelection();
-                const computerSelection = getComputerSelection();
-                const result = playRound(humanSelection, computerSelection);
-                results.push(result);
-                console.log(`Round ${i + 1}: ${result}`);
-            }           
-            
-            console.log(determineWinner(results));
-
-        }
-
-        playGame();
-
-    </script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    
+    <h1>Rock Paper Scissors Game</h1>
+
+        <!-- Contenedores para la información -->
+    <div id="roundDisplay">Round: 0 / 5</div>
+    <div id="scoreDisplay">Score: You 0 - 0 Computer</div>
+    <h3 id="resultDisplay">Choose your weapon to start!</h3>
+
+    <!-- Botones de juego -->
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+    <!-- Botón de reinicio (oculto inicialmente) -->
+    <button id="resetBtn" style="display: none;">Play Again</button>
 </body>
 </html>
